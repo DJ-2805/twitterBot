@@ -1,3 +1,4 @@
 twython
 tweepy
 requests
+ipykernel
