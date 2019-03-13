@@ -2,17 +2,18 @@ import requests # an http library written for humans
 from twython import Twython, TwythonError
 import time
 
-# ref source 2 if comments are unclear for this section
-apiKey = key # your unique api key in the field
-apiUrl = url # https://the url in the field
+appKey = '9AhPSwqckmWmPMx6Q8QZy7prt'
+appSecret = 'tzPHFncPr4dwvgkYJMoiTLopcFFUKYev65rAnGqt96B79No1gE'
 
-# ref source 3
-appKey = 'Your Key'
-appSecret = 'Your Secret Key'
-oauthToken = 'Your token'
-oauthTokenSecret = 'Your secret Token'
+twitter = Twython(appKey, appSecret, oauth_version=2)
+ACCESS_TOKEN = twitter.obtain_access_token()
 
-twitter = Twython(appKey, appSecret, oauthToken, oauthTokenSecret)
+twitter = Twython(appKey, access_token=ACCESS_TOKEN)
+
+'''
+twitter.search(q='python')
+twitter.search(q='python',result_type='popular')
+'''
 
 # liners.txt will be replaced with geo data
 # NOTE: look into getting images
