@@ -1,44 +1,18 @@
-import requests # an http library written for humans
 from twython import Twython, TwythonError
-import time
 
-appKey = '9AhPSwqckmWmPMx6Q8QZy7prt'
-appSecret = 'tzPHFncPr4dwvgkYJMoiTLopcFFUKYev65rAnGqt96B79No1gE'
+app_key = '9AhPSwqckmWmPMx6Q8QZy7prt'
+app_secret = 'tzPHFncPr4dwvgkYJMoiTLopcFFUKYev65rAnGqt96B79No1gE'
 
-twitter = Twython(appKey, appSecret, oauth_version=2)
-ACCESS_TOKEN = twitter.obtain_access_token()
+acc_tok = '1075518467707527168-FXvV9mw6onLPNKWgBr4Ohq28ehCOST'
+acc_secret = 'TGOnjrECN80kPaFc1w1euqHezMz4WckfT1N8LISTyEFSh'
 
-twitter = Twython(appKey, access_token=ACCESS_TOKEN)
+twitter = Twython(app_key, app_secret, acc_tok, acc_secret)
 
-'''
-twitter.search(q='python')
-twitter.search(q='python',result_type='popular')
-'''
-
-# liners.txt will be replaced with geo data
-# NOTE: look into getting images
-# NOTE: see how geo data determines the image selected
-# possible API's that can help with geo data and sat images
+# attachment_url: to website for reference to block
+# media_ids: jpg?
+# status: information about block
+# NOTE: status must be unique, so that Twitter doesn't block the tweet
 try:
-    with open('liners.txt', 'r+') as tweetfile:
-		buff = tweetfile.readlines()
-
-    for line in buff[:]:
-		line = line.strip(r'\n') #Strips any empty line.
-		if len(line)<=140 and len(line)>0:
-			print ("Tweeting...")
-			twitter.update_status(status=line)
-			with open ('liners.txt', 'w') as tweetfile:
-				buff.remove(line) #Removes the tweeted line.
-				tweetfile.writelines(buff)
-			time.sleep(900)
-		else:
-			with open ('liners.txt', 'w') as tweetfile:
-				buff.remove(line) #Removes the line that has more than 140 characters.
-				tweetfile.writelines(buff)
-			print ("Skipped line - Char length violation")
-			continue
-    print ("No more lines to tweet...") #When you see this... Well :) Go find some new tweets...
-
+    twitter.update_status(status='Hello World!')
 except TwythonError as e:
-	print (e)
+    print (e)
