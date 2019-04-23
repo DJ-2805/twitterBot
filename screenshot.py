@@ -3,8 +3,14 @@
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 import sys
+import os
+import time
  
-def main(latitude, longitude): 
+def main(latitude, longitude):
+	directory = "./save"
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+	curr_time = time.time()
 	options = webdriver.ChromeOptions()
 	options.add_argument('--ignore-certificate-errors')
 	options.add_argument("--test-type")
@@ -16,7 +22,7 @@ def main(latitude, longitude):
 	driver.execute_script("window.scrollTo(0, window.scrollY + 10)")
 
 	WebDriverWait(driver, 10)
-	driver.save_screenshot("screenshot.png")
+	driver.save_screenshot("./save/screenshot" + str(curr_time) + ".png")
 	 
 	driver.close()
 
