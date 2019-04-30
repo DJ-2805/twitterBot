@@ -1,4 +1,4 @@
 twython
 tweepy
 requests
-ipykernel
+selenium
