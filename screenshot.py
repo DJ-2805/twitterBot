@@ -6,9 +6,20 @@ import sys
 import os
 import time
 import csv
+import simplejson as json
+from PIL import Image
+from urllib.parse import urlsplit, parse_qs
+import urllib.request
  
 def main(latitude, longitude):
-    directory = "./save"
+	bg_url = 'https://revision.lewis.ucla.edu/arcgis/rest/services/ACS/ACS0610_NoTile/MapServer/0/query?geometry='+longitude+','+latitude+'&geometryType=esriGeometryPoint&inSR=4269&spatialRel=esriSpatialRelIntersects&outFields=GEOID&returnGeometry=false&returnIdsOnly=false&returnCountOnly=false&returnZ=false&returnM=false&returnDistinctValues=false&f=pjson'
+	contents = urllib.request.urlopen(bg_url).read()
+	json_response = json.loads(contents)
+	#print(json_response)
+	geoid = json_response["features"][0]["attributes"]["GEOID"]
+	#print(geoid)
+
+	directory = "./save"
 	if not os.path.exists(directory):
 		os.makedirs(directory)
 	row = []
@@ -18,10 +29,10 @@ def main(latitude, longitude):
 	options.add_argument('--ignore-certificate-errors')
 	options.add_argument("--test-type")
 	options.binary_location = "/usr/bin/chromium"
-        driver = webdriver.Chrome('/usr/lib/chomium-browser/chromedriver') #replace ... with a proper path to the chromedriver
+	driver = webdriver.Chrome('/usr/lib/chomium-browser/chromedriver') #replace ... with a proper path to the chromedriver
 	driver.maximize_window()
 	 
-	driver.get('http://revision.lewis.ucla.edu/details/index.html?geoid=15000US060372699031&x=' + longitude + '&y=' + latitude) #just a sample coordinate
+	driver.get('http://revision.lewis.ucla.edu/details/index.html?geoid='+ geoid + '&x=' + longitude + '&y=' + latitude) #just a sample coordinate
 	driver.execute_script("window.scrollTo(0, window.scrollY + 10)")
 
 	WebDriverWait(driver, 10)
@@ -60,6 +71,18 @@ def main(latitude, longitude):
 	with open('./save/people.csv', 'w') as writeFile:
 		writer = csv.writer(writeFile)
 		writer.writerows(rows)
+
+	test_image = "./save/screenshot.png"
+	original = Image.open(test_image)
+
+	width, height = original.size   # Get dimensions
+	left = 0
+	top = 2*height/5
+	right = width/2-180
+	bottom = height
+	cropped_example = original.crop((left, top, right, bottom))
+
+	cropped_example.show()
 	
 
 if __name__ == "__main__":
