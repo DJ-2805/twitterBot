@@ -1,6 +1,0 @@
-twython
-tweepy
-requests
-selenium
-pandas
-ipython

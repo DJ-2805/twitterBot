@@ -8,7 +8,7 @@ import time
 import csv
  
 def main(latitude, longitude):
-	directory = "./save"
+    directory = "./save"
 	if not os.path.exists(directory):
 		os.makedirs(directory)
 	row = []
@@ -18,7 +18,7 @@ def main(latitude, longitude):
 	options.add_argument('--ignore-certificate-errors')
 	options.add_argument("--test-type")
 	options.binary_location = "/usr/bin/chromium"
-	driver = webdriver.Chrome('/Users/jiayuzhao/Downloads/chromedriver') #replace ... with a proper path to the chromedriver
+        driver = webdriver.Chrome('/usr/lib/chomium-browser/chromedriver') #replace ... with a proper path to the chromedriver
 	driver.maximize_window()
 	 
 	driver.get('http://revision.lewis.ucla.edu/details/index.html?geoid=15000US060372699031&x=' + longitude + '&y=' + latitude) #just a sample coordinate
