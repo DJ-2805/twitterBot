@@ -1,0 +1,32 @@
+1565218043600	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.mCAdz4dkHggu"
+1565218044141	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1565218044142	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1565218044142	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1565218044142	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1565218046447	Marionette	INFO	Listening on port 36443
+1565218046510	Marionette	WARN	TLS certificate errors will be ignored for this session
+1565218064966	Marionette	INFO	Stopped listening on port 36443
+1565218156007	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.nDmW7e2E6ovI"
+1565218156499	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1565218156499	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1565218156500	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1565218156500	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1565218158504	Marionette	INFO	Listening on port 40601
+1565218158555	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://revision.lewis.ucla.edu/details/charts-theme.js, line 13: ReferenceError: Highcharts is not defined
+JavaScript error: https://revision.lewis.ucla.edu/details/data.js, line 1380: TypeError: revgeocode_data is undefined
+JavaScript error: https://revision.lewis.ucla.edu/details/data.js, line 1299: TypeError: igr_raw.features is undefined
+JavaScript error: https://revision.lewis.ucla.edu/details/data.js, line 184: TypeError: zhvi_data_raw.features[0] is undefined
+1565218191646	Marionette	INFO	Stopped listening on port 40601
+1565218252236	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.xR97OIbwA8iI"
+1565218252717	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1565218252718	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1565218252718	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1565218252718	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1565218254683	Marionette	INFO	Listening on port 43401
+1565218254748	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://revision.lewis.ucla.edu/details/charts-theme.js, line 13: ReferenceError: Highcharts is not defined
+JavaScript error: https://revision.lewis.ucla.edu/details/data.js, line 1299: TypeError: igr_raw.features is undefined
+JavaScript error: https://revision.lewis.ucla.edu/details/data.js, line 1380: TypeError: revgeocode_data is undefined
+JavaScript error: https://revision.lewis.ucla.edu/details/data.js, line 184: TypeError: zhvi_data_raw.features[0] is undefined
+1565218262533	Marionette	INFO	Stopped listening on port 43401
