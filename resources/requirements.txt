@@ -2,3 +2,5 @@ twython
 tweepy
 requests
 selenium
+Pillow
+pandas
