@@ -3,16 +3,21 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from PIL import Image
 
+path = r'/home/itsadmin/Documents/twitterBot/resources/geckodriver'
 
-def grabBlockImage(url,geoid):
-    driver = webdriver.Firefox(executable_path=r'/home/dja/Documents/projects/ITS/masterTwitterBot/resources/geckodriver')
-
+def grabBlockImage(blocks):
+    driver = webdriver.Firefox(executable_path=path)
     driver.maximize_window()
-    driver.get(url)
-    driver.execute_script("window.scrollTo(0, window.scrollY + 10)")
 
-    WebDriverWait(driver, 10)
-    driver.save_screenshot("./tweets/"+geoid+".png")
+    size = blocks.shape[0]
+
+    for i in range(5):
+        geoid = str(blocks['GeoID'][i])
+        url = blocks['Link'][i]
+        driver.get(url)
+        driver.execute_script("window.scrollTo(0, window.scrollY + 10)")
+        WebDriverWait(driver, 10)
+        driver.save_screenshot("./tweets/"+geoid+".png")
 
     driver.close()
 
@@ -25,8 +30,3 @@ def clipBlockImage(geoid):
 	right = width/2-180
 	bottom = height
 	cropped = original.crop((left, top, right, bottom))
-
-driver = webdriver.Chrome(executable_path=r'/mnt/c/Users/Admin/Documents/projects/twitterBot/resources/chromedriver')
-driver.maximize_window()
-driver.get('https://github.com')
-driver.close()
