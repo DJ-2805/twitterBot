@@ -12,10 +12,9 @@ def grabBlockImage(url,geoid):
     driver.execute_script("window.scrollTo(0, window.scrollY + 10)")
 
     WebDriverWait(driver, 10)
-	driver.save_screenshot("./tweets/"+geoid+".png")
+    driver.save_screenshot("./tweets/"+geoid+".png")
 
     driver.close()
-    return
 
 def clipBlockImage(geoid):
 	original = Image.open(geoid+'.png')
@@ -26,4 +25,8 @@ def clipBlockImage(geoid):
 	right = width/2-180
 	bottom = height
 	cropped = original.crop((left, top, right, bottom))
-    return
+
+driver = webdriver.Chrome(executable_path=r'/mnt/c/Users/Admin/Documents/projects/twitterBot/resources/chromedriver')
+driver.maximize_window()
+driver.get('https://github.com')
+driver.close()
