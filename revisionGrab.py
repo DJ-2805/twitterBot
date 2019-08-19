@@ -17,7 +17,7 @@ def grabBlockImage(blocks,size):
         driver.execute_script("window.scrollTo(0, window.scrollY + 10)")
         WebDriverWait(driver, 10)
         sleep(5)
-        driver.save_screenshot("./screenshots/"+geoid+".png")
+        driver.save_screenshot("../screenshots/"+geoid+".png")
 
     driver.close()
 
@@ -25,13 +25,13 @@ def clipBlockImage(blocks,size):
     for i in range(size):
         geoid = str(blocks['GeoID'][i])
         try:
-            original = Image.open('./screenshots/'+geoid+'.png')
+            original = Image.open('../screenshots/'+geoid+'.png')
             width,height = original.size
             left = 14
             top = 2*height/5 - 78
             right = width/2-310
             bottom = height - 245
             cropped = original.crop((left,top,right,bottom))
-            cropped.save('./tweets/'+geoid+'.png','PNG')
+            cropped.save('../tweets/'+geoid+'.png','PNG')
         except:
             print(geoid)

@@ -10,8 +10,7 @@ data = pd.read_csv(name)
 
 # extracting necessary columns
 blocks = data[['GeoID','Link']]
-size = blocks.shape[0]
+size = blocks.shape[0] # 10133
 
-# rg.grabBlockImage(blocks,size)
-
+rg.grabBlockImage(blocks,size)
 rg.clipBlockImage(blocks,size)
