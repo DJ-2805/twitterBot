@@ -4,3 +4,5 @@ requests
 selenium
 Pillow
 pandas
+jupyterlab
+boto3
