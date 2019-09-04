@@ -1,4 +1,4 @@
-#!/home/itsadmin/Documents/venvITS/bin/python3
+#!/home/dja/Documents/projects/ITS/venvTwitterBot/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

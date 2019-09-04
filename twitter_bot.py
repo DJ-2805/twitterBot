@@ -1,6 +1,7 @@
 from twython import Twython, TwythonError
-from pandas import read_csv
 from PIL import Image
+from csv import reader
+from collections import OrderedDict
 import boto3 as b3
 
 app_key = '9AhPSwqckmWmPMx6Q8QZy7prt'
@@ -15,14 +16,32 @@ DATA = 'tweets.csv'
 KEY = 'tweets/'
 IMG_PATH = '/tmp/local.png'
 CSV_PATH = '/tmp/tweets.csv'
+TXT_PATH = '/tmp/index.txt'
 
-def getBlock(blocks):
-    geoid = blocks['GeoID'][0]
-    text = blocks['Text'][0]
-    blocks = blocks.drop(0)
-    # check path
-    blocks.to_csv(CSV_PATH)
+def getCSV(path):
+    csvfile = open(path, mode='r')
+    csvread = reader(csvfile)
+    
+    header = next(csvread)
+    odict = OrderedDict()
+    for row in csvread:
+        odict[row[0]] = row[1:]
+    return odict
+
+def getBlock(blocks,index):
+    geoid = blocks[index][0]
+    text = blocks[index][1][0]
     return text,geoid
+
+def getIndex(path):
+    file = open(path, mode='r')
+    index = int(file.read())
+    return index
+
+def writeIndex(path, index):
+    file = open(path, mode='w')
+    newIndex = str(index + 1)
+    file.write(newIndex)
 
 def twitterBot(text):
     twitter = Twython(app_key, app_secret, acc_tok, acc_secret)
@@ -37,10 +56,13 @@ def twitterBot(text):
 
 def lambda_handler(event,context):
     s3.download_file(BUCKET,DATA,CSV_PATH)
-    soCal = read_csv(CSV_PATH)
-    blocks = soCal[['GeoID','Text']]
-
-    text,geoid = getBlock(blocks)
+    
+    odict = getCSV(CSV_PATH)
+    index = getIndex(TXT_PATH)
+    text,geoid = getBlock(odict,index)
+    
+    writeIndex(TXT_PATH,index)
+    
     s3.upload_file(CSV_PATH,BUCKET,DATA)
     s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
     twitterBot(text)
