@@ -1,7 +1,6 @@
 from twython import Twython, TwythonError
 from PIL import Image
 from csv import reader
-from collections import OrderedDict
 import boto3 as b3
 
 app_key = '9AhPSwqckmWmPMx6Q8QZy7prt'
@@ -23,14 +22,14 @@ def getCSV(path):
     csvread = reader(csvfile)
     
     header = next(csvread)
-    odict = OrderedDict()
+    csvlist = []
     for row in csvread:
-        odict[row[0]] = row[1:]
-    return odict
+        csvlist.append(row)
+    return csvlist
 
 def getBlock(blocks,index):
     geoid = blocks[index][0]
-    text = blocks[index][1][0]
+    text = blocks[index][1]
     return text,geoid
 
 def getIndex(path):
@@ -57,9 +56,9 @@ def twitterBot(text):
 def lambda_handler(event,context):
     s3.download_file(BUCKET,DATA,CSV_PATH)
     
-    odict = getCSV(CSV_PATH)
+    blist = getCSV(CSV_PATH)
     index = getIndex(TXT_PATH)
-    text,geoid = getBlock(odict,index)
+    text,geoid = getBlock(blist,index)
     
     writeIndex(TXT_PATH,index)
     
