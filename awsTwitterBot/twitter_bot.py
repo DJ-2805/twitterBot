@@ -13,6 +13,7 @@ from PIL import Image
 from csv import reader
 from collections import OrderedDict
 import boto3 as b3
+import base64
 
 # twitter access
 app_key = '9AhPSwqckmWmPMx6Q8QZy7prt'
@@ -118,15 +119,40 @@ def twitterBot(text):
 # @return: NONE
 # '''
 def lambda_handler(event,context):
-    s3.download_file(BUCKET,DATA,CSV_PATH)
-    s3.download_file(BUCKET,TXT,TXT_PATH)
+    # s3.download_file(BUCKET,DATA,CSV_PATH)
+    # s3.download_file(BUCKET,TXT,TXT_PATH)
 
-    blist = getCSV(CSV_PATH)
-    index = getIndex(TXT_PATH)
-    text,geoid = getBlock(blist,index)
+    # blist = getCSV(CSV_PATH)
+    # index = getIndex(TXT_PATH)
+    # text,geoid = getBlock(blist,index)
 
-    writeIndex(TXT_PATH,index)
+    # writeIndex(TXT_PATH,index)
 
-    s3.upload_file(CSV_PATH,BUCKET,DATA)
-    s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
-    twitterBot(text)
+    # s3.upload_file(CSV_PATH,BUCKET,DATA)
+    # s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
+    # twitterBot(text)
+
+    s3 = b3.resource('s3')
+    user_img = 'tweets/60250101011.png'
+    print ('user_img ==>', user_img)
+
+    bucket = s3.Bucket(BUCKET)
+    obj = bucket.Object(key=user_img)
+
+    response = obj.get()
+    img = response['Body'].read()
+    print ('first type',type(img))
+
+    myObj = [base64.b64encode(img)]
+
+    print('second type',type(myObj))
+    print(myObj[0])
+    print ('type(myObj[0]) ===========>',type(myObj[0]))
+
+    ret_json = str(myObj[0])
+    print('return_json ===============>',ret_json)
+
+    ret_json = ret_json.replace("b'","")
+    enc_img = ret_json.replace("'","")
+    print(enc_img)
+
