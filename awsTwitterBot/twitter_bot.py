@@ -1,5 +1,5 @@
 # ****** Twitter Bot Module *****
-# AUTHOR: David James, 20190905
+# AUTHOR: David James, 20200122
 # Functions:
 # - function getCSV
 # - function getBlock
@@ -89,6 +89,7 @@ def getIndex(path):
 # @return: NONE
 # '''
 def writeIndex(path, index):
+    print('Current Index:',index)
     file = open(path, mode='w')
     newIndex = str(index + 1)
     file.write(newIndex)
@@ -115,7 +116,7 @@ def twitterBot(text):
 # Handler function AWS uses to run previous functions
 # @param: event - UNKNOWN
 #         context - UNKNOWN
-# @return: NONE
+# @return: 1 - function executed all the way
 # '''
 def lambda_handler(event,context):
     s3.download_file(BUCKET,DATA,CSV_PATH)
@@ -127,6 +128,10 @@ def lambda_handler(event,context):
 
     writeIndex(TXT_PATH,index)
 
+    s3.upload_file(TXT_PATH,BUCKET,TXT)
     s3.upload_file(CSV_PATH,BUCKET,DATA)
     s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
     twitterBot(text)
+
+    print('End of process')
+    return 1
