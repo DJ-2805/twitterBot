@@ -1,7 +1,7 @@
 * Revision UCLA Twitter Bot
-Twitter bot posts an image correlated with the geoid and webpage to [revision][https://revision.lewis.ucla.edu/]. Bot was created by David James on 20200122
+Twitter bot posts an image correlated with the geoid and webpage to [[https://revision.lewis.ucla.edu/][revision]]. Bot was created by David James on 20200122
 
-*** Design
+** Design
     1. Bot is implemented running on Python 3.8 and is running on Amazon Web Services (AWS) lambda service
     2. It maintains the following dependencies
        | packages                   |
@@ -13,15 +13,32 @@ Twitter bot posts an image correlated with the geoid and webpage to [revision][h
        NOTE: Those that are provided by AWS do not need to be installed via pip
     3. It's design requires it to have access to an AWS S3 as well for downloading of the images during a given instance
 
-*** AWS
+** AWS
 **** Layers
      - *python-libs*: extra dependencies maintained here
 **** Triggers
      - *tweet-timer*: bot will shoot a tweet every 26 min from 0800-2000 every day
-*** Maintenance
+** Maintenance
     The bot should run for a year posting images. At the end of the year:
     - the CSV file maintained in S3 will need to be updated
     - the index counter will need to be reset to 0
     - images added to S3 must follow the format 'GEOID.png' where GEOID is the numerical ID of the block along with their information added to the CSV. The CSV has the following format:
       - geoid,text,length
         - NOTE: Bot only access geoid and text. Length is to make sure it doesn't go over Twitters character count.
+**** Bash Commands for AWS
+     #+BEGIN_SRC bash
+       # *** Updating Sorce Code for Twitter Bot ***
+       # zipping up source code for AWS
+       zip twitter_bot.zip twitter_bot.py
+       # uploading source code to AWS lambda service
+       aws lambda update-function-code --function-name its-twitter-bot --zip-file fileb://twitter_bot.zip
+
+       # *** Updating Libraries for Twitter Bot ***
+       # adding extra dependencies
+       pip install package --target python/lib/python3.8/site-packages/
+       # create new zip to be uploaded
+       zip -r python-libs.zip python
+     #+END_SRC
+     - go to AWS lambda>layes>Create version
+       - upload the new zip and choose python 3.8 and python 3.7 for runtimes
+       - also update the description with new libraries added

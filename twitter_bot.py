@@ -14,6 +14,8 @@ from collections import OrderedDict
 import boto3 as b3
 import os
 
+# size of the csv file
+SIZE = 10873
 
 # s3 paths and names
 s3 = b3.client('s3')
@@ -87,7 +89,12 @@ def getIndex(path):
 def writeIndex(path, index):
     print('Current Index:',index)
     file = open(path, mode='w')
-    newIndex = str(index + 1)
+    # if end of the file is reached
+    # program will restart at the beginning
+    if (index < SIZE):
+        newIndex = str(index + 1)
+    else:
+        newIndex = 0
     file.write(newIndex)
 
 # '''
@@ -118,18 +125,24 @@ def twitterBot(text):
 # @return: 1 - function executed all the way
 # '''
 def lambda_handler(event,context):
+    print('Downloading files')
     s3.download_file(BUCKET,DATA,CSV_PATH)
     s3.download_file(BUCKET,TXT,TXT_PATH)
 
+    print('Getting values')
     blist = getCSV(CSV_PATH)
     index = getIndex(TXT_PATH)
     text,geoid = getBlock(blist,index)
 
+    print('Updating index')
     writeIndex(TXT_PATH,index)
 
+    print('Uploading files')
     s3.upload_file(TXT_PATH,BUCKET,TXT)
     s3.upload_file(CSV_PATH,BUCKET,DATA)
+    print('Downloading PNG')
     s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
+    print('Sending tweet out')
     twitterBot(text)
 
     print('End of process')
