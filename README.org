@@ -1,7 +1,7 @@
 * Revision UCLA Twitter Bot
 Twitter bot posts an image correlated with the geoid and webpage to [[https://revision.lewis.ucla.edu/][revision]].
 
-Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[https://github.com/SophieJY][Sophie]] and [[https://github.com/pzavar][Parham]]
+Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[https://github.com/SophieJY][Sophie]] and [[https://github.com/pzavar][Parham]] in conjunction with the Institute of Transportation Studies (ITS).
 
 ** Design
     1. Bot is implemented running on Python 3.8 and is running on Amazon Web Services (AWS) lambda service
@@ -20,7 +20,11 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
      - *python-libs*: extra dependencies maintained here
 **** Triggers
      - *tweet-timer*: bot will shoot a tweet every 34 min from 0700-0000 every day
-** Maintenance
+** File Structure
+   - python: directory that has dependencies of libraries needed for the bot
+   - README.org: README file with information on bot
+   - twitter_bot.py: source code for twitter bot
+* Maintenance
     The bot should run for a year posting images. At the end of the year:
     - the CSV file maintained in S3 will need to be updated, if new blocks want to be shown
     - images added to S3 must follow the format 'GEOID.png' where GEOID is the numerical ID of the block along with their information added to the CSV. The CSV has the following format:
@@ -40,6 +44,6 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
        # create new zip to be uploaded
        zip -r python-libs.zip python
      #+END_SRC
-     - go to AWS lambda>layes>Create version
+     - go to AWS>Lambda>Layes>python-libs>Create version
        - upload the new zip and choose python 3.8 and python 3.7 for runtimes
        - also update the description with new libraries added
