@@ -6,7 +6,7 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
 ** Design
     1. Bot is implemented running on Python 3.8 and is running on Amazon Web Services (AWS) lambda service
     2. It maintains the following dependencies
-       | *packages*                 |
+       | *Packages*                 |
        | twython                    |
        | reader (AWS provided)      |
        | OrderedDict (AWS provided) |
