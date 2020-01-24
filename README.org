@@ -1,4 +1,7 @@
-* Revision UCLA Twitter Bot
+#+TITLE:Revision UCLA Twitter Bot
+#+AUTHOR: David James
+#+DATE: 2020 Jan 23
+
 Twitter bot posts an image correlated with the geoid and webpage to [[https://revision.lewis.ucla.edu/][revision]].
 
 Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[https://github.com/SophieJY][Sophie]] and [[https://github.com/pzavar][Parham]] in conjunction with the Institute of Transportation Studies (ITS).
