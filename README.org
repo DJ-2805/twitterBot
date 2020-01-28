@@ -23,7 +23,7 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
 **** Layers
      - *python-libs*: extra dependencies maintained here
 **** Triggers
-     - *tweet-timer*: bot will shoot a tweet every 34 min from 0700-0000 every day
+     - *tweet-timer*: bot will shoot a tweet every 31 min from 0700-0000 every day
 ** File Structure
    - python: directory that has dependencies of libraries needed for the bot
    - README.org: README file with information on bot
