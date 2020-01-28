@@ -22,10 +22,8 @@ s3 = b3.client('s3')
 BUCKET = os.environ['BUCKET']
 DATA = 'tweets.csv'
 TXT = 'index.txt'
-KEY = 'tweets/'
 
 # lambda paths when uploaded
-IMG_PATH = '/tmp/local.png'
 CSV_PATH = '/tmp/tweets.csv'
 TXT_PATH = '/tmp/index.txt'
 
@@ -108,12 +106,8 @@ def twitterBot(text):
                       os.environ['app_secret'],
                       os.environ['acc_tok'],
                       os.environ['acc_secret'])
-
-    img = open(IMG_PATH,'rb')
-
     try:
-        response = twitter.upload_media(media=img)
-        twitter.update_status(status=text, media_ids=[response['media_id']])
+        twitter.update_status(status=text)
     except TwythonError as e:
         print (e)
 
@@ -140,8 +134,6 @@ def lambda_handler(event,context):
     print('Uploading files')
     s3.upload_file(TXT_PATH,BUCKET,TXT)
     s3.upload_file(CSV_PATH,BUCKET,DATA)
-    print('Downloading PNG')
-    s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
     print('Sending tweet out')
     twitterBot(text)
 
