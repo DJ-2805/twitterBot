@@ -133,15 +133,15 @@ def lambda_handler(event,context):
     index = getIndex(TXT_PATH)
     text,geoid = getBlock(blist,index)
 
-    print('Downloading PNG')
-    s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
-
     print('Updating index')
     writeIndex(TXT_PATH,index)
 
     print('Uploading files')
     s3.upload_file(TXT_PATH,BUCKET,TXT)
     s3.upload_file(CSV_PATH,BUCKET,DATA)
+    print('Downloading PNG')
+    s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
+
     print('Sending tweet out')
     twitterBot(text)
 
