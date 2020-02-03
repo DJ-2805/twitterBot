@@ -1,6 +1,6 @@
 #+TITLE:Revision UCLA Twitter Bot
 #+AUTHOR: David James
-#+DATE: 2020 Jan 23
+#+DATE: 2020 Feb 03
 
 Twitter bot posts an image correlated with the geoid and webpage to [[https://revision.lewis.ucla.edu/][revision]].
 
@@ -51,8 +51,8 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
        - upload the new zip and choose python 3.8 and python 3.7 for runtimes
        - also update the description with new libraries added
 **** Inserting Images
-     - The bot has now been implemented to only insert text and the website end should have a Twitter card embedded to render an image
-     - If the design needs to be reverted to the bot tweeting image the following code is necessary for it to run
+     - The bot is implemented to insert images, but may result in only text when "Twitter cards" are implemented on the website
+     - If the cards get implemented the following lines of code are what should be removed
        #+BEGIN_SRC python
          # ... global variables defined at top of file
          KEY = 'tweets/'
@@ -65,7 +65,9 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
          img = open(IMG_PATH,'rb')
          # . within try:
          response = twitter.upload_media(media=img)
-         # replace .update_status with this line of text
+         # replace .update_status
          twitter.update_status(status=text, media_ids=[response['media_id']])
+         # with this line
+         twitter.update_status(status=text)
        #+END_SRC
      - images added to S3 must follow the format 'GEOID.png' where GEOID is the numerical ID of the block along with their information added to the CSV. 

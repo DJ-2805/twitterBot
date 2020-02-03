@@ -1,5 +1,5 @@
 # ****** Twitter Bot Module *****
-# AUTHOR: David James, 20200122
+# AUTHOR: David James, 20200203
 # Functions:
 # - function getCSV
 # - function getBlock
@@ -22,10 +22,12 @@ s3 = b3.client('s3')
 BUCKET = os.environ['BUCKET']
 DATA = 'tweets.csv'
 TXT = 'index.txt'
+KEY = 'tweets/'
 
 # lambda paths when uploaded
 CSV_PATH = '/tmp/tweets.csv'
 TXT_PATH = '/tmp/index.txt'
+IMG_PATH = '/tmp/local.png'
 
 # '''
 # function getCSV
@@ -106,8 +108,11 @@ def twitterBot(text):
                       os.environ['app_secret'],
                       os.environ['acc_tok'],
                       os.environ['acc_secret'])
+    img = open(IMG_PATH,'rb')
+
     try:
-        twitter.update_status(status=text)
+        response = twitter.upload_media(media=img)
+        twitter.update_status(status=text, media_ids=[response['media_id']])
     except TwythonError as e:
         print (e)
 
@@ -127,6 +132,9 @@ def lambda_handler(event,context):
     blist = getCSV(CSV_PATH)
     index = getIndex(TXT_PATH)
     text,geoid = getBlock(blist,index)
+
+    print('Downloading PNG')
+    s3.download_file(BUCKET,KEY+geoid+'.png',IMG_PATH)
 
     print('Updating index')
     writeIndex(TXT_PATH,index)
