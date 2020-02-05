@@ -1,5 +1,5 @@
 # ****** Twitter Bot Module *****
-# AUTHOR: David James, 20200203
+# AUTHOR: David James, 20200205
 # Functions:
 # - function getCSV
 # - function getBlock

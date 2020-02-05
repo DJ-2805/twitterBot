@@ -35,17 +35,21 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
         - NOTE: Bot only accesses geoid and text. Length is to make sure it doesn't go over Twitters character count.
 **** Bash Commands for AWS
      #+BEGIN_SRC bash
+       # ensure you are in the main dirctory that contains the code
+
        # *** Updating Sorce Code for Twitter Bot ***
        # zipping up source code for AWS
-       zip twitter_bot.zip twitter_bot.py
+       zip ../twitter_bot.zip twitter_bot.py
        # uploading source code to AWS lambda service
-       aws lambda update-function-code --function-name its-twitter-bot --zip-file fileb://twitter_bot.zip
+       aws lambda update-function-code --function-name its-twitter-bot --zip-file fileb://../twitter_bot.zip
+       # NOTE: both commands above insert the zip in the directory above the current directory
+       #       this is so no extra files are added to the github when zips are created
 
        # *** Updating Libraries for Twitter Bot ***
        # adding extra dependencies
        pip install package --target python/lib/python3.8/site-packages/
        # create new zip to be uploaded
-       zip -r python-libs.zip python
+       zip -r ../python-libs.zip python
      #+END_SRC
      - go to AWS>Lambda>Layes>python-libs>Create version
        - upload the new zip and choose python 3.8 and python 3.7 for runtimes
