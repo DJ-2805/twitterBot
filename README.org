@@ -7,7 +7,7 @@ Twitter bot posts an image correlated with the geoid and webpage to [[https://re
 Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[https://github.com/SophieJY][Sophie]] and [[https://github.com/pzavar][Parham]] in conjunction with the Institute of Transportation Studies (ITS).
 
 ** Design
-    1. Bot is implemented running on Python 3.8 and is running on Amazon Web Services (AWS) lambda service
+    1. Bot is implemented on Python 3.8 and is running on Amazon Web Services (AWS) lambda service
     2. It maintains the following dependencies
        | *Packages*                 |
        |----------------------------|
@@ -32,7 +32,7 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
     The bot should run for the year posting tweets. At the end of the year:
     - the CSV file maintained in S3 will need to be updated, if new blocks want to be shown. The CSV has the following format:
       - geoid,text,length
-        - NOTE: Bot only access geoid and text. Length is to make sure it doesn't go over Twitters character count.
+        - NOTE: Bot only accesses geoid and text. Length is to make sure it doesn't go over Twitters character count.
 **** Bash Commands for AWS
      #+BEGIN_SRC bash
        # *** Updating Sorce Code for Twitter Bot ***
