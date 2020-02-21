@@ -11,7 +11,6 @@
 from twython import Twython, TwythonError
 from csv import reader
 from collections import OrderedDict
-from time import sleep
 import boto3 as b3
 import os
 
