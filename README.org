@@ -28,6 +28,7 @@ Bot was created by [[https://github.com/DJ-2805][David James]] with help from [[
    - python: directory that has dependencies of libraries needed for the bot
    - README.org: README file with information on bot
    - twitter_bot.py: source code for twitter bot
+   - screenshot.py: code for taking screenshot of the map
 * Maintenance
     The bot should run for the year posting tweets. At the end of the year:
     - the CSV file maintained in S3 will need to be updated, if new blocks want to be shown. The CSV has the following format:
